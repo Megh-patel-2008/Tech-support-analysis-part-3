@@ -27,3 +27,25 @@ Then start describing your problem by typing in the terminal window.
 
 The purpose of this project is to demonstrate and study library classes, such 
 as ArrayList, HashMap, HashSet, and Random.
+
+
+
+Questions:
+
+43.putIfAbsent(key, value) in HashMap only inserts the key-value pair if the
+   key is not already present. If the key exists, the value remains unchanged.
+   This is different from put, which overwrites the value if the key already exists.
+   
+46.Yes it is accurate and complete. The useful parts include method signiture, parameters description and overall
+   class summaries
+   
+47.@author: specifies the class author.
+   @version: specifies the class version.
+   @param: describes a parameter.
+   @return: describes the return value.
+   
+48.@throws or @exception: documents exceptions a method may throw.
+   @deprecated: marks a class or method as obsolete.
+   @see: links to related classes or methods.
+   {@link ClassName#method}: creates clickable inline links.
+   {@code text}: formats text as inline code.

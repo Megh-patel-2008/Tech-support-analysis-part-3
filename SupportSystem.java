@@ -1,20 +1,21 @@
 import java.util.HashSet;
 
 /**
- * This class implements a technical support system. It is the top level class 
+ * This class implements a technical support system. It is the top-level class 
  * in this project. The support system communicates via text input/output 
  * in the text terminal.
  * 
  * This class uses an object of class InputReader to read input from the user,
- * and an object of class Responder to generate responses. It contains a loop
- * that repeatedly reads input and generates output until the users wants to 
- * leave.
+ * an object of class Responder to generate responses, and a WordCounter to 
+ * track usage of words. It contains a loop that repeatedly reads input and 
+ * generates output until the user wants to leave.
  * 
- * @author  Michael Kölling and David J. Barnes
- * @version 7.4
+ * @author  
+ *   Michael Kölling and David J. Barnes (original)
+ *   Updated by Megh (Lab 5, Part III)
+ * @version 7.5
  */
-public class SupportSystem
-{
+public class SupportSystem {
     private InputReader reader;
     private Responder responder;
     private WordCounter counter;
@@ -22,31 +23,30 @@ public class SupportSystem
     /**
      * Creates a technical support system.
      */
-    public SupportSystem()
-    {
+    public SupportSystem() {
         reader = new InputReader();
         responder = new Responder();
         counter = new WordCounter();
     }
 
     /**
-     * Start the technical support system. This will print a welcome message and enter
-     * into a dialog with the user, until the user ends the dialog.
+     * Start the technical support system. 
+     * Prints a welcome message and enters into a dialog with the user,
+     * until the user types "bye".
      */
-    public void start()
-    {
+    public void start() {
         boolean finished = false;
-
         printWelcome();
 
-        while(!finished) {
+        while (!finished) {
             HashSet<String> input = reader.getInput();
 
-            if(input.contains("bye")) {
+            if (input.contains("bye")) {
                 finished = true;
-            }
-            else {
+            } else {
+                // Track word usage
                 counter.addWords(input);
+                // Generate a response
                 String response = responder.generateResponse(input);
                 System.out.println(response);
             }
@@ -57,8 +57,7 @@ public class SupportSystem
     /**
      * Print a welcome message to the screen.
      */
-    private void printWelcome()
-    {
+    private void printWelcome() {
         System.out.println("Welcome to the DodgySoft Technical Support System.");
         System.out.println();
         System.out.println("Please tell us about your problem.");
@@ -67,10 +66,17 @@ public class SupportSystem
     }
 
     /**
-     * Print a good-bye message to the screen.
+     * Print a goodbye message and also show the word usage statistics.
      */
-    private void printGoodbye()
-    {
+    private void printGoodbye() {
         System.out.println("Nice talking to you. Bye...");
+        System.out.println();
+
+        // Q44: print all word counts
+        counter.printWordCounts();
+
+        // Q45: optionally, print only non-response words
+        System.out.println();
+        counter.printNonResponseWordCounts(responder.getResponseMap());
     }
 }
